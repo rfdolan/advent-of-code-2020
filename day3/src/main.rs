@@ -12,8 +12,8 @@ const MOVEMENT_ARR: [(u32, u32); 5] = [(1,1), (3,1), (5,1), (7,1), (1,2)];
 
 fn main(){
     let vec = parse_file("day3.txt");
-    part1(&vec[..]);
-    part2(&vec[..]);
+    part1(&vec);
+    part2(&vec);
 }
 
 // Solution for part 1
