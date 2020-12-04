@@ -9,8 +9,8 @@ fn main(){
     //println!("{}", vec[0]);
 
     // Put the code to do the thing here
-    part1(&vec[..]);
-    part2(&vec[..]);
+    part1(&vec);
+    part2(&vec);
 }
 
 // Solution to part 1
@@ -73,6 +73,7 @@ fn is_valid_2(password: &str) -> bool {
             found = true;
         }
     }
+    
     return found;
 }
 
