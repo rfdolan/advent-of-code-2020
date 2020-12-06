@@ -21,13 +21,12 @@ fn part2() {
 }
 
 // Parse file with given name in parent directory into a vector of ints
-fn parse_file(name: &str) -> Vec<i32> {
+fn parse_file(name: &str) -> Vec<String> {
     let mut vec = Vec::new();
     if let Ok(lines) = read_lines(name) {
         for line in lines {
             if let Ok(ip) = line {
-                let line_num: i32 = ip.parse().expect("Not a number!");
-                vec.push(line_num);
+                vec.push(ip);
             }
         }
     }
