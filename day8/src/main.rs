@@ -27,26 +27,20 @@ fn part1(input: &Vec<String>) {
             break;
         }
         visited.push(pos);
-        if jkl.0 == ACC {
-            acc = acc + jkl.1;
-            pos = pos + 1;
-        }
-        else if jkl.0 == JMP {
-            pos = pos + jkl.1;
-        }
-        else {
-            pos = pos + 1;
-        }
+
+        let (res_acc, res_pos) = do_op(jkl.0, acc, pos, jkl.1, false);
+        acc = res_acc;
+        pos = res_pos;
     }
     println!("Part 1: {}", acc);
 }
 
 // Solution for part 2
 fn part2(input: &Vec<String>) {
-    let mut flipped:Vec<i32> = Vec::new();
+    let mut flipped:Vec<i32> = Vec::new(); // Vector of positions we tried to flip
     loop {
-        let mut try_replace = true;
-        let mut visited: Vec<i32> = Vec::new();
+        let mut try_replace = true; // Should we try to flip an instruction
+        let mut visited: Vec<i32> = Vec::new(); // Vector of visited positions
         let mut acc: i32 = 0;
         let mut pos: i32 = 0;
         loop {
@@ -59,40 +53,47 @@ fn part2(input: &Vec<String>) {
             }
             let instruction: Vec<String> = input[pos as usize].split(" ").map(|s| s.to_string()).collect();
             let jkl: (&String, i32) = (&instruction[0], instruction[1].parse().expect("Not a number"));
+            
+            // If we revisit, we're looping, so break and try again.
             if visited.contains(&pos) {
                 break;
             }
             visited.push(pos);
+
+            // If we have not tried to flip this iteration and we have not tried to flip this position, do it
             if try_replace && !flipped.contains(&pos){
-                if jkl.0 == ACC {
-                    acc = acc + jkl.1;
-                    pos = pos + 1;
-                }
-                else if jkl.0 == JMP {
-                    flipped.push(pos);
+                let (res_acc, res_pos) = do_op(jkl.0, acc, pos, jkl.1, true);
+                if jkl.0 != ACC {
                     try_replace = false;
-                    pos = pos + 1;
-                }
-                else {
                     flipped.push(pos);
-                    try_replace = false;
-                    pos = pos + jkl.1;
                 }
+                acc = res_acc;
+                pos = res_pos;
             }
+
+            // Operate as normal
             else {
-                if jkl.0 == ACC {
-                    acc = acc + jkl.1;
-                    pos = pos + 1;
-                }
-                else if jkl.0 == JMP {
-                    pos = pos + jkl.1;
-                }
-                else {
-                    pos = pos + 1;
-                }
+                let (res_acc, res_pos) = do_op(jkl.0, acc, pos, jkl.1, false);
+                acc = res_acc;
+                pos = res_pos;
             }
         }
     }
+}
+
+// Does the specified operation, swapping the functionality of JMP and NOP if swap is true
+// Returns a tuple of the updated accumulator and position
+fn do_op(op: &String, acc: i32, pos: i32, val: i32, swap: bool) -> (i32, i32) {
+    if op == ACC {
+        return (acc + val, pos + 1);
+    }
+    else if (op == JMP && !swap) || (op == NOP && swap) {
+        return (acc, pos+val);
+    }
+    else {
+        return (acc, pos + 1);
+    }
+
 }
 
 // Parse file with given name in parent directory into a vector of ints
