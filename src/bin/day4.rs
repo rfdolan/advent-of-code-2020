@@ -129,14 +129,14 @@ fn is_valid(data: HashMap<&str, &str>) -> bool {
         if field == &"hgt"{
             match data.get(field) {
                 Some(result) => {
-                    println!("{}", result);
+                    //println!("{}", result);
                     if result.chars().rev().take(2).collect::<String>() == *"ni" {
                         let mut s = result.to_string();
                         let len = s.len();
                         s.truncate(len-2);
                         //println!("{}in", s);
                         if !HGT_RANGE_IN.contains(&s.parse().expect("Not a number")){
-                            println!("INVALID^^");
+                            //println!("INVALID^^");
                             //println!("Height {} invalid", result);
                             return false;
                         }
@@ -148,7 +148,7 @@ fn is_valid(data: HashMap<&str, &str>) -> bool {
                         //println!("{}cm", s);
                         
                         if !HGT_RANGE_CM.contains(&s.parse().expect("Not a number")){
-                            println!("INVALID^^");
+                            //println!("INVALID^^");
                             //println!("Height {} invalid", result);
                             return false;
                         }

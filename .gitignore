@@ -2,7 +2,7 @@
 !README.txt
 
 # Generated files
-/*/target/
+/target/
 
 # The library shouldn't decide about the exact versions of 
 # its dependencies, but let the downstream crate decide.

@@ -46,7 +46,7 @@ fn part2(answers: &Vec<String>) {
     let mut prev = "";
     let mut acc = 0;
     for person in answers {
-        println!("{}",person);
+        //println!("{}",person);
         if answered_questions == ""  && prev == ""{
             answered_questions = person.to_string();
         }
