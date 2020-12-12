@@ -67,15 +67,14 @@ fn part2(passports: &mut Vec<String>) {
     passports.retain(|s|has_all_req(s));
     let mut valid_passports =0;
     for passport in passports {
-        passport.trim();
         // uhh split up into sublist of fields
-        let mut split = passport.split(" ");
+        let split = passport.split(" ");
         // map fields to  values in map??
         let mut data = HashMap::new();
         for item in split {
             let mut item_split = item.split(":");
             let key = item_split.nth(0).unwrap();
-            //println!("[{}]", item);
+            //println!("[{}]", item);// Solution for part 2
             let val = item_split.nth(0).unwrap();
             data.insert(
                 key,
