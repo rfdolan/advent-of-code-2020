@@ -1,5 +1,4 @@
 use std::vec::Vec;
-mod inp;
 
 const JMP: &str = "jmp";
 const ACC: &str = "acc";

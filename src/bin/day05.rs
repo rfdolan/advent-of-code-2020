@@ -1,5 +1,4 @@
 use std::vec::Vec;
-mod inp;
 
 const ROW_SIZE: u32 = 127;
 const COL_SIZE:u32 = 7;

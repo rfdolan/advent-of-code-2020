@@ -1,5 +1,4 @@
 use std::vec::Vec;
-mod inp;
 const DEGREE_INCREMENT: i32 = 90;
 
 fn main(){

@@ -1,5 +1,4 @@
 use std::vec::Vec;
-mod inp;
 
 const TREE_CHAR: char = '#';
 // Constants for movement in part 1

@@ -1,5 +1,5 @@
 use std::vec::Vec;
-mod inp;
+
 
 fn main() {
     let vec = inp::parse_file("day1.txt").iter().map(|x| x.parse().unwrap()).collect::<Vec<i32>>();

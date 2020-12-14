@@ -1,5 +1,4 @@
 use std::vec::Vec;
-mod inp;
 
 fn main(){
     let vec = inp::parse_file("day6.txt");

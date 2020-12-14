@@ -1,7 +1,6 @@
 use std::vec::Vec;
 use std::ops::Range;
 use std::collections::HashMap;
-mod inp;
 
 const BYR_RANGE:Range<u32> = 1920..2003;
 const IYR_RANGE:Range<u32> = 2010..2021;

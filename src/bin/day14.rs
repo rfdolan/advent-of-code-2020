@@ -1,7 +1,6 @@
 use std::vec::Vec;
 use regex::Regex;
 use std::collections::HashMap;
-mod inp;
 
 fn main(){
     let vec = inp::parse_file("day14.txt");

@@ -1,5 +1,4 @@
 use std::vec::Vec;
-mod inp;
 
 const PREAMBLE_LEN: u64 = 25;
 
