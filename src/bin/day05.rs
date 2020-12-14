@@ -1,13 +1,11 @@
-use std::fs::File;
-use std::io::{self, BufRead};
-use std::path::Path;
 use std::vec::Vec;
+mod inp;
 
 const ROW_SIZE: u32 = 127;
 const COL_SIZE:u32 = 7;
 
 fn main(){
-    let vec = parse_file("day5.txt");
+    let vec = inp::parse_file("day5.txt");
     // Put the code to do the thing here
     part1and2(&vec);
 }
@@ -69,24 +67,4 @@ fn part1and2(tickets: &Vec<String>) {
 fn get_seat_id(pos: (u32, u32)) -> u32 {
     let (row,col) = pos;
     (row * 8) + col
-}
-
-
-// Parse file with given name in parent directory into a vector of ints
-fn parse_file(name: &str) -> Vec<String> {
-    let mut vec = Vec::new();
-    if let Ok(lines) = read_lines(name) {
-        for line in lines {
-            if let Ok(ip) = line {
-                vec.push(ip);
-            }
-        }
-    }
-    vec
-}
-
-fn read_lines<P>(filename: P) -> io::Result<io::Lines<io::BufReader<File>>>
-where P: AsRef<Path>, {
-    let file = File::open(filename)?;
-    Ok(io::BufReader::new(file).lines())
 }

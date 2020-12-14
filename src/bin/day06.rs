@@ -1,10 +1,8 @@
-use std::fs::File;
-use std::io::{self, BufRead};
-use std::path::Path;
 use std::vec::Vec;
+mod inp;
 
 fn main(){
-    let vec = parse_file("day6.txt");
+    let vec = inp::parse_file("day6.txt");
     // Put the code to do the thing here
     part1(&vec);
     part2(&vec);
@@ -70,23 +68,4 @@ fn part2(answers: &Vec<String>) {
     acc = acc + answered_questions.len();
 
     println!("Part 2: {}", acc);
-}
-
-// Parse file with given name in parent directory into a vector of ints
-fn parse_file(name: &str) -> Vec<String> {
-    let mut vec = Vec::new();
-    if let Ok(lines) = read_lines(name) {
-        for line in lines {
-            if let Ok(ip) = line {
-                vec.push(ip);
-            }
-        }
-    }
-    vec
-}
-
-fn read_lines<P>(filename: P) -> io::Result<io::Lines<io::BufReader<File>>>
-where P: AsRef<Path>, {
-    let file = File::open(filename)?;
-    Ok(io::BufReader::new(file).lines())
 }

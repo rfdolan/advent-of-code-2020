@@ -1,7 +1,5 @@
-use std::fs::File;
-use std::io::{self, BufRead};
-use std::path::Path;
 use std::vec::Vec;
+mod inp;
 
 const TREE_CHAR: char = '#';
 // Constants for movement in part 1
@@ -11,26 +9,26 @@ const DOWN: u32 = 1;
 const MOVEMENT_ARR: [(u32, u32); 5] = [(1,1), (3,1), (5,1), (7,1), (1,2)];
 
 fn main(){
-    let vec = parse_file("day3.txt");
+    let vec = inp::parse_file("day3.txt");
     part1(&vec);
     part2(&vec);
 }
 
 // Solution for part 1
-fn part1(vec: &[String]) {
+fn part1(vec: &Vec<String>) {
     let trees = get_num_trees(vec, RIGHT, DOWN);
     println!("Part 1: {}", trees);
 }
 
 // Solution for part 2
-fn part2(vec: &[String]) {
+fn part2(vec: &Vec<String>) {
     let mut ans = 0;
     // Iterate through all the different movement patterns we want to do
     for (right, down) in &MOVEMENT_ARR {
         let trees = get_num_trees(vec, *right, *down);
         // If ans has not been initialized then set it to the first value. 
         // I guess if you get really lucky and hit 0 trees the code will break since your
-        // answer would be 0, but whatever nobody't that lucky, right??
+        // answer would be 0, but whatever nobody's that lucky, right??
         if ans == 0 {
             ans = trees;
         } else {
@@ -41,7 +39,7 @@ fn part2(vec: &[String]) {
 }
 
 // Get the number of trees going down the given hill in the given movement pattern
-fn get_num_trees(vec: &[String], right: u32, down: u32) -> u32 {
+fn get_num_trees(vec: &Vec<String>, right: u32, down: u32) -> u32 {
     let mut x = 0;
     let mut y = 0;
     let mut trees = 0;
@@ -67,23 +65,4 @@ fn add_x(curr: u32, to_add: u32, size: u32) -> u32 {
         return res-size;
     }
     return res;
-}
-
-// Parse file with given name in parent directory into a vector of ints
-fn parse_file(name: &str) -> Vec<String> {
-    let mut vec = Vec::new();
-    if let Ok(lines) = read_lines(name) {
-        for line in lines {
-            if let Ok(ip) = line {
-                vec.push(ip);
-            }
-        }
-    }
-    vec
-}
-
-fn read_lines<P>(filename: P) -> io::Result<io::Lines<io::BufReader<File>>>
-where P: AsRef<Path>, {
-    let file = File::open(filename)?;
-    Ok(io::BufReader::new(file).lines())
 }

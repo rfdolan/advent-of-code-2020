@@ -1,11 +1,8 @@
-use std::fs::File;
-use std::io::{self, BufRead};
-use std::path::Path;
 use std::vec::Vec;
+mod inp;
 
 fn main(){
-    std::env::set_var("RUST_BACKTRACE", "1");
-    let vec = parse_file("day2.txt");
+    let vec = inp::parse_file("day2.txt");
     //println!("{}", vec[0]);
 
     // Put the code to do the thing here
@@ -14,7 +11,7 @@ fn main(){
 }
 
 // Solution to part 1
-fn part1(vec: &[String]) {
+fn part1(vec: &Vec<String>) {
     let mut it = 0;
     for line in vec {
         if is_valid_1(line) {
@@ -25,7 +22,7 @@ fn part1(vec: &[String]) {
 }
 
 // Solution to part 2
-fn part2(vec: &[String]) {
+fn part2(vec: &Vec<String>) {
     let mut it = 0;
     for line in vec {
         if is_valid_2(line) {
@@ -75,23 +72,4 @@ fn is_valid_2(password: &str) -> bool {
     }
     
     return found;
-}
-
-// Parse file with given name in parent directory into a vector of ints
-fn parse_file(name: &str) -> Vec<String> {
-    let mut vec = Vec::new();
-    if let Ok(lines) = read_lines(name) {
-        for line in lines {
-            if let Ok(ip) = line {
-                vec.push(ip);
-            }
-        }
-    }
-    vec
-}
-
-fn read_lines<P>(filename: P) -> io::Result<io::Lines<io::BufReader<File>>>
-where P: AsRef<Path>, {
-    let file = File::open(filename)?;
-    Ok(io::BufReader::new(file).lines())
 }

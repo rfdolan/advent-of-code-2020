@@ -1,12 +1,10 @@
-use std::fs::File;
-use std::io::{self, BufRead};
-use std::path::Path;
 use std::vec::Vec;
+mod inp;
 
 const PREAMBLE_LEN: u64 = 25;
 
 fn main(){
-    let vec = parse_file("day9.txt");
+    let vec = inp::parse_file("day9.txt").iter().map(|x| x.parse().unwrap()).collect();
     // Put the code to do the thing here
     part1and2(&vec);
 }
@@ -18,7 +16,7 @@ fn part1and2(input: &Vec<u64>) {
     // Part 1
     for x in (PREAMBLE_LEN)..(input.len() as u64){
         if !check_num(&(&input[(x-PREAMBLE_LEN) as usize..(x) as usize]).to_vec(), input[(x) as usize]) {
-            println!("Index: {}", x);
+            //println!("Index: {}", x);
             println!("Part 1: {}", input[x as usize]);
             part1_ans = input[x as usize];
             break;
@@ -58,25 +56,4 @@ fn check_num(vec: &Vec<u64>, num: u64 ) -> bool {
         }
     }
     return false;
-}
-
-// Parse file with given name in parent directory into a vector of ints
-fn parse_file(name: &str) -> Vec<u64> {
-    let mut vec = Vec::new();
-    if let Ok(lines) = read_lines(name) {
-        for line in lines {
-            if let Ok(ip) = line {
-                // u32 was too small for this chonky chonky input
-                let line_num: u64 = ip.parse().expect("Not a number!");
-                vec.push(line_num);
-            }
-        }
-    }
-    vec
-}
-
-fn read_lines<P>(filename: P) -> io::Result<io::Lines<io::BufReader<File>>>
-where P: AsRef<Path>, {
-    let file = File::open(filename)?;
-    Ok(io::BufReader::new(file).lines())
 }
