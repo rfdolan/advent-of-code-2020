@@ -1,6 +1,5 @@
 use std::vec::Vec;
 
-
 fn main() {
     let vec = inp::parse_file("day1.txt").iter().map(|x| x.parse().unwrap()).collect::<Vec<i32>>();
     part1(&vec);
