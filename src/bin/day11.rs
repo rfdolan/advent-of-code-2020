@@ -24,7 +24,7 @@ fn unchanged(prev: &Vec<Vec<char>>, curr: &Vec<Vec<char>>) -> bool {
     }
     return true;
 }
-
+/*
 fn print_board(board: &Vec<Vec<char>>) {
     for x in board {
         for y in x {
@@ -33,6 +33,7 @@ fn print_board(board: &Vec<Vec<char>>) {
         println!("");
     }
 }
+*/
 
 // Get total number of occupied seats given board
 fn get_num_occupied(board: &Vec<Vec<char>>) -> u32 {
