@@ -74,8 +74,8 @@ fn part1(input: &Vec<String>) {
             board.insert((x as i32, y as i32, 0), alive);
         }
     }
-    for cycle in 0..CYCLES {
-        println!("Cycle {}, {} spaces", cycle, board.len());
+    for _cycle in 0..CYCLES {
+        //println!("Cycle {}, {} spaces", cycle, board.len());
         // Add surrounding nodes that we might want to check.
         let mut to_add = Vec::new(); // use add list to avoid mutating while iterating.
         for x in board.iter(){
@@ -138,8 +138,8 @@ fn part2(input: &Vec<String>){
             board.insert((x as i32, y as i32, 0,0), alive);
         }
     }
-    for cycle in 0..CYCLES {
-        println!("Cycle {}, {} spaces", cycle, board.len());
+    for _cycle in 0..CYCLES {
+        //println!("Cycle {}, {} spaces", cycle, board.len());
         let mut to_add = Vec::new();
         for x in board.iter(){
             for change in SURROUNDING_2.iter() {
