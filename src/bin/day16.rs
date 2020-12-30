@@ -81,7 +81,7 @@ fn valid_ticket(fields: &HashMap<String, Vec<Range<i32>>>, ticket: &Vec<i32>) ->
 //#  \_____\____/|_____/|______| /_/    \_\_|  |_|______/_/    \_\_____/  #
 //#########################################################################
 // Seriously I feel like I'm commiting a crime with this soltion. Don't know why but it's just eugh
-// Solution for part 1
+// Solution for part 1 and 2
 fn part1and2(input: &Vec<String>) {
     let (fields, my_ticket, all_tickets) = parse_tickets(input);
     let mut invalid_nums = Vec::new();
